@@ -17,3 +17,4 @@ lib
 npm-debug.log
 /test/coverage
 /packages/*/lib
+/packages/*/npm-debug.log*

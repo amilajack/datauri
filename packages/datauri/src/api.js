@@ -4,11 +4,13 @@ import {
   readFileSync,
   createReadStream
 } from 'fs';
-import mimer from 'mimer';
 import getDimensions from 'image-size';
-import uri from './template/uri';
 import css from './template/css';
 import Stream from 'stream';
+import { default as transform, format, createMetadata } from 'datauri-transform';
+import assign from 'object-assign';
+
+const noop = function() {};
 
 class Api extends Stream {
   constructor() {
@@ -17,20 +19,8 @@ class Api extends Stream {
     this.readable = true;
   }
 
-  format(fileName, fileContent) {
-    const fileBuffer = (fileContent instanceof Buffer) ? fileContent : new Buffer(fileContent);
-
-    this.base64 = fileBuffer.toString('base64');
-    this.createMetadata(fileName);
-
-    return this;
-  }
-
-  createMetadata(fileName) {
-    this.fileName = fileName;
-    this.mimetype = mimer(fileName);
-    const { mimetype, base64 = '' } = this;
-    this.content = uri({ mimetype, base64 });
+  format(...args) {
+    assign(this, format(...args));
 
     return this;
   }
@@ -43,15 +33,15 @@ class Api extends Stream {
     handler.call(this, null, this.content, this);
   }
 
-  encode(fileName, handler) {
+  encode(fileName, handler = noop) {
     return this.async(fileName, err => handler && this.runCallback(handler, err));
   }
 
-  async(fileName, handler) {
+  async(fileName, handler = noop) {
     const base64Chunks = [];
     const propagateStream = chunk => this.emit('data', chunk);
 
-    propagateStream(this.createMetadata(fileName).content);
+    propagateStream(createMetadata(fileName).content);
     createReadStream(fileName, { encoding: 'base64' })
       .on('data', propagateStream)
       .on('data', chunk => base64Chunks.push(chunk))
@@ -60,9 +50,11 @@ class Api extends Stream {
         this.emit('error', err);
       })
       .on('end', () => {
-        this.base64 = base64Chunks.join('');
+        const base64 = base64Chunks.join('');
+
+        this.base64 = base64;
         this.emit('end');
-        handler.call(this.createMetadata(fileName));
+        handler.call(assign(this, createMetadata(fileName, base64)));
         this.emit('encoded', this.content, this);
       });
   }

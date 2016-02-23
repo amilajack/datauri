@@ -1,9 +1,6 @@
 {
-  "name": "datauri-cli",
-  "bin": {
-    "datauri": "lib/index.js"
-  },
-  "description": "Create DataURI scheme using terminal",
+  "name": "datauri-transform",
+  "description": "Create DataURI scheme easily",
   "version": "1.1.0",
   "repository": {
     "type": "git",
@@ -30,8 +27,7 @@
   "author": "Helder Santana",
   "license": "MIT",
   "dependencies": {
-    "datauri": "^1.0.4",
-    "copy-paste": "^1.1.4",
-    "minimist": "^1.2.0"
-  }
+    "mimer": "^0.2.1"
+  },
+  "main": "lib/index.js"
 }

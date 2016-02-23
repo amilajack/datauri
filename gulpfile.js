@@ -6,7 +6,6 @@ var through = require("through2");
 var chalk   = require("chalk");
 var newer   = require("gulp-newer");
 var babel   = require("gulp-babel");
-var watch   = require("gulp-watch");
 var gutil   = require("gulp-util");
 var gulp    = require("gulp");
 var path    = require("path");
@@ -47,10 +46,4 @@ gulp.task("build", function () {
       presets: ['es2015-loose']
     }))
     .pipe(gulp.dest(dest));
-});
-
-gulp.task("watch", ["build"], function () {
-  watch(scripts, function () {
-    gulp.start("build");
-  });
 });

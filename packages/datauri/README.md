@@ -125,6 +125,8 @@ console.log(DataURI('test/myfile.png')); //=> "data:image/png;base64,iVBORw0KGgo
 ```
 
 ### From a Buffer
+>  Uses datauri-transform
+
 If you already have your file as a Buffer, use this. It's much faster than passing a string.
 
 ```js
