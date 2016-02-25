@@ -4,8 +4,8 @@ import { should as Should } from 'chai';
 import * as cssExp from '../expected/css';
 import fs from 'fs';
 import { Writable } from 'stream';
+import DataURI from '../../packages/datauri';
 
-const DataURI = require(datauri_path)
 const should = Should();
 const nodeVersion = semver.clean(process.version);
 const fixture    = 'test/fixture.gif';

@@ -13,7 +13,7 @@ const execute = cmd => new Promise((resolve, reject) => {
   exec(cmd, (err, data) => err ? reject(err) : resolve(data));
 });
 
-const cli = cli_cmd;
+const cli = 'node packages/datauri-cli/lib';
 
 let dUri, cssContent;
 
@@ -279,6 +279,7 @@ describe('Data-uri Client', () => {
       it('should copy a datauri', async() => {
 
         const stdout = await execute(`${cli} ${fixture} --copy`);
+
 
         stdout.should.not.be.empty;
 

@@ -1,0 +1,37 @@
+{
+  "name": "datauri-cli",
+  "bin": {
+    "datauri": "lib/index.js"
+  },
+  "description": "Create DataURI scheme using terminal",
+  "version": "1.0.4",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/heldr/datauri.git"
+  },
+  "engines": {
+    "node": ">= 0.10"
+  },
+  "keywords": [
+    "datauri",
+    "data uri",
+    "data",
+    "uri",
+    "data-uri",
+    "optimization",
+    "uri",
+    "optimize",
+    "inline",
+    "png",
+    "jpg",
+    "woff",
+    "base64"
+  ],
+  "author": "Helder Santana",
+  "license": "MIT",
+  "dependencies": {
+    "datauri": "1.0.4",
+    "copy-paste": "^1.1.4",
+    "minimist": "^1.2.0"
+  }
+}
