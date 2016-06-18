@@ -1,3 +1,5 @@
+/* eslint no-unused-expressions: 0, max-len: 0 */
+
 import fs from 'fs';
 import { should as Should } from 'chai';
 import { exec } from 'child_process';
@@ -6,8 +8,7 @@ import { paste } from 'copy-paste';
 
 const should = Should();
 const fixture = 'test/fixture.gif';
-const expectedString = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
-const expected = new RegExp(expectedString);
+const expectedString = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
 const execute = cmd => new Promise((resolve, reject) => {
   exec(cmd, (err, data) => err ? reject(err) : resolve(data));
@@ -15,10 +16,7 @@ const execute = cmd => new Promise((resolve, reject) => {
 
 const cli = cli_cmd;
 
-let dUri, cssContent;
-
 describe('Data-uri Client', () => {
-
   describe('generate a data-uri string', () => {
     it('should give advice when a user do not type anything after datauri', async() => {
       const stdout = await execute(cli);
@@ -36,11 +34,9 @@ describe('Data-uri Client', () => {
   });
 
   describe('--css', () => {
-
-    let createdFile = 'test/duality.css';
+    const createdFile = 'test/duality.css';
 
     describe('create a css file', () => {
-
       afterEach(done => fs.unlink(createdFile, done));
 
       it('should insert a css class with the target file name',
@@ -57,7 +53,7 @@ describe('Data-uri Client', () => {
         });
 
       it('should insert a css class with a specific name', done => {
-        let cssClass = 'foobar';
+        const cssClass = 'foobar';
 
         exec(
           `${cli} ${fixture} --css=${createdFile} --class=${cssClass}`, (
@@ -126,9 +122,8 @@ describe('Data-uri Client', () => {
     });
 
     describe('update a css file', () => {
-
-      let updateFile = 'test/ratamahatta.scss';
-      let fakeContent = '.small-icon {color: #000;}';
+      const updateFile = 'test/ratamahatta.scss';
+      const fakeContent = '.small-icon {color: #000;}';
       let updateClass = fakeContent + cssExp.simple;
 
       beforeEach(() => fs.writeFileSync(updateFile, fakeContent));
@@ -148,88 +143,87 @@ describe('Data-uri Client', () => {
         });
 
       it('should insert a css class with a specific name', done => {
-        let cssClass = 'pipoca',
-          fileContent = updateClass.replace('fixture', cssClass);
+        const cssClass = 'pipoca';
+        const fileContent = updateClass.replace('fixture', cssClass);
 
         exec(`${cli} ${fixture} --css=${updateFile} --class=${cssClass}`, (
-            err, stdout) => {
-            should.not.exist(err);
-            stdout.should.not.be.empty;
-            stdout.should.match(/updated/);
-            fs.readFileSync(updateFile, 'utf-8').should.equal(
-              fileContent);
-            done();
-          });
+          err, stdout) => {
+          should.not.exist(err);
+          stdout.should.not.be.empty;
+          stdout.should.match(/updated/);
+          fs.readFileSync(updateFile, 'utf-8').should.equal(
+            fileContent);
+          done();
+        });
       });
 
       it('should insert a css class with a width', done => {
         updateClass = fakeContent + cssExp.width;
         exec(`${cli} ${fixture} --css=${updateFile} --width`, (
-            err, stdout) => {
-            should.not.exist(err);
-            stdout.should.not.be.empty;
-            stdout.should.match(/updated/);
-            fs.existsSync(updateFile).should.be.true;
-            fs.readFileSync(updateFile, 'utf-8').should.equal(updateClass);
-            done();
-          });
+          err, stdout) => {
+          should.not.exist(err);
+          stdout.should.not.be.empty;
+          stdout.should.match(/updated/);
+          fs.existsSync(updateFile).should.be.true;
+          fs.readFileSync(updateFile, 'utf-8').should.equal(updateClass);
+          done();
+        });
       });
 
       it('should insert a css class with a height', done => {
         updateClass = fakeContent + cssExp.height;
         exec(`${cli} ${fixture} --css=${updateFile} --height`, (
-            err, stdout) => {
-            should.not.exist(err);
-            stdout.should.not.be.empty;
-            stdout.should.match(/updated/);
-            fs.existsSync(updateFile).should.be.true;
-            fs.readFileSync(updateFile, 'utf-8').should.equal(updateClass);
-            done();
-          });
+          err, stdout) => {
+          should.not.exist(err);
+          stdout.should.not.be.empty;
+          stdout.should.match(/updated/);
+          fs.existsSync(updateFile).should.be.true;
+          fs.readFileSync(updateFile, 'utf-8').should.equal(updateClass);
+          done();
+        });
       });
 
 
       it('should insert a css class with both width and height', done => {
         updateClass = fakeContent + cssExp.both;
         exec(`${cli} ${fixture} --css=${updateFile} --width --height`, (
-            err, stdout) => {
-            should.not.exist(err);
-            stdout.should.not.be.empty;
-            stdout.should.match(/updated/);
-            fs.existsSync(updateFile).should.be.true;
-            fs.readFileSync(updateFile, 'utf-8').should.equal(updateClass);
-            done();
-          });
+          err, stdout) => {
+          should.not.exist(err);
+          stdout.should.not.be.empty;
+          stdout.should.match(/updated/);
+          fs.existsSync(updateFile).should.be.true;
+          fs.readFileSync(updateFile, 'utf-8').should.equal(updateClass);
+          done();
+        });
       });
 
       it('should insert a css class with both width a background-size', done => {
         updateClass = fakeContent + cssExp.bgsize;
         exec(`${cli} ${fixture} --css=${updateFile} --background-size`, (
-            err, stdout) => {
-            should.not.exist(err);
-            stdout.should.not.be.empty;
-            stdout.should.match(/updated/);
-            fs.existsSync(updateFile).should.be.true;
-            fs.readFileSync(updateFile, 'utf-8').should.equal(updateClass);
-            done();
-          });
+          err, stdout) => {
+          should.not.exist(err);
+          stdout.should.not.be.empty;
+          stdout.should.match(/updated/);
+          fs.existsSync(updateFile).should.be.true;
+          fs.readFileSync(updateFile, 'utf-8').should.equal(updateClass);
+          done();
+        });
       });
     });
 
     describe('output a css', () => {
-      let updateClass = cssExp.simple;
+      const updateClass = cssExp.simple;
 
       it('should display a css class with the target file name', async() => {
-          const stdout = await execute(`${cli} ${fixture} --css`);
+        const stdout = await execute(`${cli} ${fixture} --css`);
 
-          stdout.should.not.be.empty;
-          stdout.should.have.string(updateClass);
+        stdout.should.not.be.empty;
+        stdout.should.have.string(updateClass);
       });
 
       it('should display a css class with a specific name', async() => {
         const cssClass = 'pipoca';
-        const expected = updateClass.replace('fixture', cssClass)
-
+        const expected = updateClass.replace('fixture', cssClass);
         const stdout = await execute(`${cli} ${fixture} --css --class=${cssClass}`);
 
         stdout.should.not.be.empty;
@@ -277,7 +271,6 @@ describe('Data-uri Client', () => {
   if (!process.env.TRAVIS) {
     describe('--copy', () => {
       it('should copy a datauri', async() => {
-
         const stdout = await execute(`${cli} ${fixture} --copy`);
 
         stdout.should.not.be.empty;
@@ -286,7 +279,6 @@ describe('Data-uri Client', () => {
       });
 
       it('should copy css with datauri', async() => {
-
         const stdout = await execute(`${cli} ${fixture} --copy --css`);
 
         stdout.should.not.be.empty;
