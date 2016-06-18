@@ -6,6 +6,7 @@
     "node": true
   },
   "rules": {
+    "new-cap": 0,
     "no-underscore-dangle": 0,
     comma-dangle: ["error", "never"],
     "consistent-return": 0,

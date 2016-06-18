@@ -73,7 +73,7 @@ class Api extends Stream {
     }
 
     if (existsSync(fileName)) {
-      let fileContent = readFileSync(fileName);
+      const fileContent = readFileSync(fileName);
 
       return this.format(fileName, fileContent).content;
     }
@@ -81,7 +81,7 @@ class Api extends Stream {
     throw new Error(`The file ${fileName} was not found!`);
   }
 
-  getCSS(config={}) {
+  getCSS(config = {}) {
     if (!this.content) {
       throw new Error('Create a data-uri config using the method encodeSync');
     }

@@ -1,4 +1,7 @@
 test/
+src/
+tools/
+docs/
 .jshintrc
 .travis.yml
 .gitignore
