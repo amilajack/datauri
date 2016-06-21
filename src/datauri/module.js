@@ -1,6 +1,6 @@
 import Api from './api';
 
-const ENC_TYPE = configSize => configSize > 1 ? 'encode' : 'encodeSync';
+const ENC_TYPE = configSize => (configSize > 1 ? 'encode' : 'encodeSync');
 
 class DataURI extends Api {
 

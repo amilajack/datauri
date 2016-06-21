@@ -6,7 +6,12 @@ import { should as Should } from 'chai';
 import * as cssExp from '../expected/css';
 import { Writable } from 'stream';
 
-const DataURI = require(datauri_path);
+const DataURI = require(
+  process.env.NODE_ENV === 'production'
+    ? '../../lib/datauri'
+    : '../../src/datauri/module.js'
+);
+
 const should = Should();
 const nodeVersion = semver.clean(process.version);
 const fixture = 'test/fixture.gif';

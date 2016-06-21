@@ -11,10 +11,12 @@ const fixture = 'test/fixture.gif';
 const expectedString = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
 const execute = cmd => new Promise((resolve, reject) => {
-  exec(cmd, (err, data) => err ? reject(err) : resolve(data));
+  exec(cmd, (err, data) => (err ? reject(err) : resolve(data)));
 });
 
-const cli = cli_cmd;
+const cli = process.env.NODE_ENV === 'production'
+              ? 'node lib/datauri-cli'
+              : './node_modules/.bin/babel-node --presets es2015 src/cli/module.js';
 
 describe('Data-uri Client', () => {
   describe('generate a data-uri string', () => {

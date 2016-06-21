@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+/* eslint-disable */
+
 var semver = require('semver');
 var nodeVersion = semver.clean(process.version);
 var build = './';

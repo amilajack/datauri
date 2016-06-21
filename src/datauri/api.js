@@ -81,12 +81,14 @@ class Api extends Stream {
     throw new Error(`The file ${fileName} was not found!`);
   }
 
-  getCSS(config = {}) {
+  getCSS(defaults = {}) {
+    const config = {};
+
     if (!this.content) {
       throw new Error('Create a data-uri config using the method encodeSync');
     }
 
-    config.class = config.class || path.basename(this.fileName, path.extname(this.fileName));
+    config.class = defaults.class || path.basename(this.fileName, path.extname(this.fileName));
     config.background = this.content;
 
     if (config.width || config.height || config['background-size']) {
